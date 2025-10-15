@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HeartSecureX - Heart Disease Prediction</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #6c63ff;
+      --secondary: #ff6b6b;
+      --background: #f4f6fb;
+      --card-bg: #ffffff;
+      --text-dark: #222;
+      --text-light: #555;
+      --nav-bg: #2c2c54;
+      --nav-text: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif; }
+    body {
+      background: var(--background);
+      color: var(--text-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* NAVBAR */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--nav-bg);
+      padding: 1rem 3rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    nav h1 { color: #ffd700; font-size: 1.6rem; font-weight: 700; letter-spacing: 1px; }
+
+    nav ul { display: flex; list-style: none; gap: 1.8rem; }
+
+    nav ul li a {
+      color: var(--nav-text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover { color: var(--secondary); }
+
+    #theme-toggle {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: linear-gradient(135deg, #6c63ff 0%, #5a54e2 100%);
+      color: #fff;
+    }
+    .hero h2 { font-size: 2.3rem; margin-bottom: 0.8rem; }
+    .hero p { max-width: 700px; margin: 0 auto; font-size: 1.1rem; }
+
+    /* INFO SECTION */
+    main { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3rem; padding: 3rem 1.5rem; }
+
+    .info-section {
+      max-width: 900px;
+      background: #fff;
+      border-radius: 16px;
+      padding: 2.5rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+      line-height: 1.6;
+    }
+
+    .info-section h3 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+    }
+
+    .info-section p, .info-section ul {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+
+    .info-section ul { margin-left: 1.5rem; }
+
+    /* BUTTON */
+    .btn-primary {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.9rem 2rem;
+      background: var(--primary);
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    .btn-primary:hover {
+      background: #574bff;
+      box-shadow: 0 4px 12px rgba(108, 99, 255, 0.3);
+    }
+
+    /* FOOTER */
+    footer {
+      background: #2c2c54;
+      color: #fff;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    .footer-container {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer-col h4 { color: #ffd700; margin-bottom: 1rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li a {
+      color: #ddd;
+      text-decoration: none;
+      display: block;
+      margin: 0.4rem 0;
+      transition: color 0.3s;
+    }
+    .footer-col ul li a:hover { color: var(--secondary); }
+
+    .social-icons a {
+      color: #fff;
+      margin: 0 0.5rem;
+      font-size: 1.2rem;
+      transition: color 0.3s;
+    }
+    .social-icons a:hover { color: var(--secondary); }
+
+    .footer-bottom { font-size: 0.9rem; color: #bbb; }
+
+    @media (max-width: 600px) {
+      nav { flex-direction: column; gap: 0.6rem; }
+      .info-section { padding: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <h1>HeartSecureX</h1>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="{{ url_for('about') }}">Get Started</a></li>
+    </ul>
+    <button id="theme-toggle"><i class="fa-solid fa-moon"></i></button>
+  </nav>
+
+  <section class="hero">
+    <h2>Your AI-Powered Heart Health Companion</h2>
+    <p>HeartSecureX uses advanced machine learning models to help predict heart disease risk and promote preventive care.</p>
+  </section>
+
+  <main>
+    <div class="info-section">
+      <h3>What is HeartSecureX?</h3>
+      <p><strong>HeartSecureX</strong> is an intelligent heart disease prediction system designed to empower individuals and healthcare providers with early risk insights. By analyzing vital parameters and lifestyle factors, it provides a personalized probability of heart disease risk.</p>
+    </div>
+
+    <div class="info-section">
+      <h3>Understanding Heart Diseases</h3>
+      <p>Heart diseases remain the leading cause of death globally. Early detection and management are crucial to preventing severe complications.</p>
+      <ul>
+        <li><strong>Coronary artery disease:</strong> Blocked heart arteries.</li>
+        <li><strong>Heart attack:</strong> Interrupted blood flow to heart muscles.</li>
+        <li><strong>Arrhythmia:</strong> Irregular heart rhythms.</li>
+        <li><strong>Heart failure:</strong> Reduced pumping ability.</li>
+      </ul>
+    </div>
+
+    <div class="info-section">
+      <h3>How HeartSecureX Works</h3>
+      <ul>
+        <li>Collects user input through a secure form.</li>
+        <li>Processes data with a trained AI model.</li>
+        <li>Provides instant heart disease risk prediction.</li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-col">
+        <h4>HeartSecureX</h4>
+        <p>Empowering health through AI-driven insights.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="{{ url_for('register') }}">Sign up / Login</a></li>
+          <li><a href="{{ url_for('about') }}">About Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p>Email: support@heartsecurex.com</p>
+        <p>Phone: +91-9876543210</p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 HeartSecureX. All rights reserved.
+    </div>
+  </footer>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

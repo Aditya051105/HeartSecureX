@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HeartSecureX - Health Details</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    /* ---------------- GLOBAL STYLES ---------------- */
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #f3e7e9, #e3f2fd);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background: #ffffffcc; /* slightly transparent */
+      padding: 30px 35px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+      width: 420px;
+      animation: slideIn 0.8s ease forwards;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #8e44ad;
+      font-size: 1.8rem;
+    }
+
+    form label {
+      font-weight: 600;
+      margin-top: 12px;
+      display: block;
+      color: #34495e;
+    }
+
+    form input, form select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1.5px solid #dcdcdc;
+      border-radius: 10px;
+      outline: none;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+    }
+
+    form input:focus, form select:focus {
+      border-color: #8e44ad;
+      box-shadow: 0 0 8px rgba(142, 68, 173, 0.4);
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background: #16a085; /* teal-ish unique color */
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: #1abc9c;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(26, 188, 156, 0.3);
+    }
+
+    #predictionText {
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      color: #c0392b; /* dark red for prediction alert */
+      margin-top: 15px;
+    }
+
+    /* Responsive */
+    @media(max-width: 500px) {
+      .container { width: 90%; padding: 25px; }
+      h2 { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Enter Your Health Details</h2>
+    <form action="{{ url_for('predict') }}" method="POST">
+      <label for="Age">Age</label>
+      <input type="number" id="Age" name="Age" required>
+
+      <label for="Gender">Gender</label>
+      <select id="Gender" name="Gender" required>
+        <option value="1">Male</option>
+        <option value="0">Female</option>
+      </select>
+
+      <label for="Cholesterol">Cholesterol</label>
+      <input type="number" id="Cholesterol" name="Cholesterol" required>
+
+      <label for="BloodPressure">Blood Pressure</label>
+      <input type="number" id="BloodPressure" name="BloodPressure" required>
+
+      <label for="HeartRate">Heart Rate</label>
+      <input type="number" id="HeartRate" name="HeartRate" required>
+
+      <label for="Smoking">Smoking</label>
+      <select id="Smoking" name="Smoking" required>
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+      </select>
+
+      <label for="AlcoholIntake">Alcohol Intake</label>
+      <select id="AlcoholIntake" name="AlcoholIntake" required>
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+      </select>
+
+      <label for="ExerciseHours">Exercise Hours</label>
+      <input type="number" id="ExerciseHours" name="ExerciseHours" required>
+
+      <label for="FamilyHistory">Family History</label>
+      <select id="FamilyHistory" name="FamilyHistory" required>
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+      </select>
+
+      <label for="Diabetes">Diabetes</label>
+      <select id="Diabetes" name="Diabetes" required>
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+      </select>
+
+      <label for="Obesity">Obesity</label>
+      <select id="Obesity" name="Obesity" required>
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+      </select>
+
+      <label for="StressLevel">Stress Level (1-10)</label>
+      <input type="number" id="StressLevel" name="StressLevel" min="1" max="10" required>
+
+      <label for="BloodSugar">Blood Sugar</label>
+      <input type="number" id="BloodSugar" name="BloodSugar" required>
+
+      <label for="ExerciseInducedAngina">Exercise Induced Angina</label>
+      <select id="ExerciseInducedAngina" name="ExerciseInducedAngina" required>
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+      </select>
+
+      <label for="ChestPainType">Chest Pain Type (0-3)</label>
+      <input type="number" id="ChestPainType" name="ChestPainType" min="0" max="3" required>
+
+      <button type="submit">SUBMIT</button>
+    </form>
+
+    <p id="predictionText"></p>
+  </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
