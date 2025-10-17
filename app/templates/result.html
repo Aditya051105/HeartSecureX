@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Prediction Result - HeartSecureX</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    /* ---------------- GLOBAL STYLES ---------------- */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0a0a0f, #1c1c3c);
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background: rgba(4, 3, 75, 0.9);
+      padding: 35px 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 40px #bb00ff, 0 0 80px #00ffd0;
+      width: 400px;
+      text-align: center;
+      animation: glowpulse 2.5s infinite alternate;
+    }
+
+    @keyframes glowpulse {
+      0% { box-shadow: 0 0 20px #00ffd0, 0 0 40px #bb00ff90; }
+      100% { box-shadow: 0 0 40px #bb00ff, 0 0 60px #00ffd050; }
+    }
+
+    h2 {
+      color: #00ffd0;
+      margin-bottom: 15px;
+      font-size: 2rem;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 20px 0;
+      padding: 10px 15px;
+      border-radius: 12px;
+      color: #fff;
+      /* Color code based on prediction dynamically */
+      background: {% if prediction == "High Risk" %}#e74c3c{% else %}#2ecc71{% endif %};
+      box-shadow: 0 0 10px {% if prediction == "High Risk" %}#e74c3c{% else %}#2ecc71{% endif %};
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background: #bb00ff;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    button:hover {
+      background: #e600ff;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(187, 0, 255, 0.5);
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    /* Responsive */
+    @media(max-width: 500px) {
+      .container { width: 90%; padding: 30px; }
+      h2 { font-size: 1.6rem; }
+      h3 { font-size: 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Prediction Result</h2>
+    <h3>{{ prediction }}</h3>
+    <a href="/"><button><i class="fa-solid fa-arrow-left"></i> Go Back</button></a>
+  </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
