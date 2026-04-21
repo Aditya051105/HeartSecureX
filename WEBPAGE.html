@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Heart Disease Prediction System - Suryodaya College of Engineering</title>
+  <!-- Font Awesome for social icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+:root {
+  --background: #181818;
+  --foreground: #23272f;
+  --text: #eaf6fb;
+  --highlight: #00ffd0;
+  --purple: #bb00ff;
+  --container-glow: 0 0 24px #00ffd0, 0 0 36px #bb00ff90;
+}
+[data-theme="dark"] {
+  background: var(--background);
+  color: var(--text);
+}
+body {
+  background: var(--background);
+  color: var(--text);
+  font-family: 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  transition: background .3s;
+}
+nav {
+  display: flex;
+  align-items: center;
+  background: var(--foreground);
+  padding: 1rem 2rem;
+  box-shadow: 0px 1px 8px #0004;
+}
+nav h1 {
+  flex: 1;
+  font-size: 2rem;
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.8rem;
+  margin: 0;
+}
+nav a {
+  color: var(--highlight);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+nav a:hover {
+  color: #fff;
+}
+#theme-toggle {
+  background: none;
+  border: none;
+  color: var(--highlight);
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-left: 1rem;
+}
+main {
+  min-height: 80vh;
+  padding: 2.5rem;
+}
+.page {
+  display: none;
+}
+.page.active {
+  display: block;
+  animation: fadein 1.2s;
+}
+.animate-fadein {
+  animation: fadein 1s;
+}
+@keyframes fadein {
+  from { opacity: 0; transform: translateY(20px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+/* Glowing Container */
+.glowing-container {
+  background: var(--foreground);
+  border-radius: 24px;
+  box-shadow: var(--container-glow);
+  padding: 2rem 2.5rem;
+  margin: 2rem auto;
+  max-width: 540px;
+  text-align: center;
+  animation: glowpulse 2.8s infinite alternate;
+}
+@keyframes glowpulse {
+  0% { box-shadow: 0 0 24px #00ffd0, 0 0 36px #bb00ff90;}
+  100% { box-shadow: 0 0 40px #bb00ff, 0 0 60px #00ffd050;}
+}
+.glow {
+  color: var(--highlight);
+  text-shadow: 0 0 8px #bb00ff;
+}
+.glow-sm {
+  box-shadow: 0 0 8px #00ffd040;
+  border-radius: 14px;
+  margin: 1rem;
+  padding: 1.5rem;
+  background: #20232a;
+}
+.info-grid {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin: 3rem 0;
+}
+.why-use, .what-is {
+  flex: 1 1 220px;
+  min-width: 200px;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+input[type="text"],
+input[type="email"],
+input[type="number"] {
+  background: #222851;
+  color: #fff;
+  border: 1px solid #bb00ff50;
+  border-radius: 6px;
+  padding: 0.7rem;
+  font-size: 1.08rem;
+}
+input[type="checkbox"] {
+  margin-left: 0.7rem;
+  accent-color: var(--purple);
+}
+button {
+  background: linear-gradient(90deg,var(--highlight),var(--purple));
+  color: #181818;
+  border: none;
+  border-radius: 7px;
+  font-weight: bold;
+  font-size: 1.09rem;
+  padding: 0.8rem 1.5rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  box-shadow: 0 0 10px #00ffd040;
+  transition: background .15s, color .15s;
+}
+button:hover {
+  background: linear-gradient(90deg,var(--purple),var(--highlight));
+  color: #fff;
+}
+.result-animated {
+  font-size: 1.6rem;
+  color: var(--highlight);
+  animation: blink 1.1s infinite alternate;
+  margin:2rem 0;
+}
+@keyframes blink {
+  0% { opacity: 0.6;}
+  100% { opacity: 1;}
+}
+.team-grid {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 2.8rem 0;
+}
+.team-card {
+  background: #211e2c;
+  padding: 1.3rem;
+  border-radius: 12px;
+  text-align: center;
+  min-width: 170px;
+}
+.team-card img {
+  width: 65px;
+  border-radius: 50%;
+  box-shadow: 0 0 12px #00ffd030;
+  margin-bottom: 0.5rem;
+}
+.socials a {
+  color: var(--highlight);
+  font-size: 1.32rem;
+  margin: 0 0.35rem;
+  transition: color .2s;
+}
+.socials a:hover {
+  color: var(--purple);
+}
+.college {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 1.08rem;
+  color: #bdbdfb;
+}
+footer {
+  background: #222541;
+  color: #aaf8f8;
+  padding: 1.2rem 1rem;
+  text-align: center;
+  font-size: 1.08rem;
+  margin-top: 4rem;
+  box-shadow: 0 -2px 14px #bb00ff20;
+}
+.footer-socials a {
+  color: var(--highlight);
+  margin: 0 0.5rem;
+  font-size: 1.4rem;
+  transition: color .2s;
+}
+.footer-socials a:hover {
+  color: var(--purple);
+}
+/* Responsive */
+@media (max-width: 800px) {
+  nav ul { gap: 0.8rem;}
+  main { padding: 1rem;}
+  .info-grid, .team-grid {flex-direction: column;}
+  .glowing-container {padding: 1rem;}
+}
+  </style>
+</head>
+<body>
+  <nav>
+    <h1>HeartCare <span class="glow">&hearts;</span></h1>
+    <ul>
+      <li><a href="#" onclick="showPage('home')">Home</a></li>
+      <li><a href="#" onclick="showPage('registration')">Registration</a></li>
+      <li><a href="#" onclick="showPage('symptoms')">Symptoms</a></li>
+      <li><a href="#" onclick="showPage('result')">Result</a></li>
+      <li><a href="#" onclick="showPage('about')">About Us</a></li>
+    </ul>
+    <button id="theme-toggle" title="Toggle Dark/Light mode">
+      <i class="fa-solid fa-moon"></i>
+    </button>
+  </nav>
+  <main>
+    <!-- Home -->
+    <section id="home" class="page active animate-fadein">
+      <div class="glowing-container">
+        <h2>Welcome to HeartCare</h2>
+        <p>Your health matters. Predict risk and stay informed with our intelligent system.</p>
+      </div>
+      <div class="info-grid">
+        <div class="glow-sm why-use">
+          <h3>Why use this?</h3>
+          <p>Early heart disease detection saves lives. This system empowers anyone to assess and understand heart disease risk in just a few clicks.</p>
+        </div>
+        <div class="glow-sm what-is">
+          <h3>What is Heart Prediction System?</h3>
+          <p>It’s a web platform using machine learning and clinical data to predict your risk of heart disease, offering insights and awareness with modern technology.</p>
+        </div>
+      </div>
+    </section>
+    <!-- Registration -->
+    <section id="registration" class="page">
+      <div class="glowing-container">
+        <h2>Registration</h2>
+        <form id="regForm" onsubmit="event.preventDefault(); showPage('symptoms');">
+          <input required placeholder="Full Name" type="text" />
+          <input required placeholder="Email" type="email" />
+          <input required placeholder="Age" type="number" min="1" />
+          <button type="submit">Next: Symptoms</button>
+        </form>
+      </div>
+    </section>
+    <!-- Symptoms -->
+    <section id="symptoms" class="page">
+      <div class="glowing-container">
+        <h2>Enter Symptoms</h2>
+        <form id="sympForm" onsubmit="event.preventDefault(); showPage('result');">
+          <label>Chest Pain? <input type="checkbox"/></label>
+          <label>Shortness of Breath? <input type="checkbox"/></label>
+          <label>High Blood Pressure? <input type="checkbox"/></label>
+          <label>High Cholesterol? <input type="checkbox"/></label>
+          <button type="submit">Show Result</button>
+        </form>
+      </div>
+    </section>
+    <!-- Result -->
+    <section id="result" class="page">
+      <div class="glowing-container">
+        <h2>Your Risk Result</h2>
+        <div id="resultTxt" class="result-animated">Prediction: <span>Low Risk</span></div>
+        <button onclick="showPage('home')">Back to Home</button>
+      </div>
+    </section>
+    <!-- About Us -->
+    <section id="about" class="page">
+      <div class="glowing-container animate-fadein">
+        <h2>About Us</h2>
+        <p>We are a passionate student team from Suryodaya College of Engineering, dedicated to using technology for health and wellness. HeartCare leverages modern AI to make health assessment accessible for all.</p>
+        <div class="team-grid">
+          <div class="team-card glow-sm">
+            <img src="https://i.pravatar.cc/100?img=1" alt="Team Member" />
+            <div>Alex Kumar</div>
+            <div class="socials">
+              <a href="https://linkedin.com/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+              <a href="https://instagram.com/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="https://github.com/" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+          <div class="team-card glow-sm">
+            <img src="https://i.pravatar.cc/100?img=2" alt="Team Member" />
+            <div>Priya Singh</div>
+            <div class="socials">
+              <a href="https://linkedin.com/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+              <a href="https://instagram.com/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="https://github.com/" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+          <div class="team-card glow-sm">
+            <img src="https://i.pravatar.cc/100?img=3" alt="Team Member" />
+            <div>Rahul Mehta</div>
+            <div class="socials">
+              <a href="https://linkedin.com/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+              <a href="https://instagram.com/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="https://github.com/" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="college">
+          <h3>Suryodaya College of Engineering</h3>
+          <p>Nagpur, Maharashtra, India · www.suryodaya.edu</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div>Team: Alex Kumar, Priya Singh, Rahul Mehta</div>
+    <div>Suryodaya College of Engineering & Technology, Nagpur</div>
+    <div class="footer-socials">
+      <a href="https://linkedin.com/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      <a href="https://instagram.com/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://github.com/" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+    </div>
+  </footer>
+  <script>
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(page => {
+    page.classList.remove('active', 'animate-fadein');
+  });
+  const page = document.getElementById(id);
+  if (page) {
+    page.classList.add('active','animate-fadein');
+    window.scrollTo(0,0);
+  }
+}
+showPage('home');
+document.getElementById('theme-toggle').onclick = () => {
+  const html = document.documentElement;
+  if (html.getAttribute('data-theme') === 'dark') {
+    html.setAttribute('data-theme','light');
+    document.getElementById('theme-toggle').innerHTML='<i class="fa-solid fa-sun"></i>';
+  } else {
+    html.setAttribute('data-theme','dark');
+    document.getElementById('theme-toggle').innerHTML='<i class="fa-solid fa-moon"></i>';
+  }
+};
+  </script>
+</body>
+</html>
